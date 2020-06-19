@@ -1,0 +1,27 @@
+{% extends 'appp/base.html' %}
+
+{% block content %}
+    
+    <div align="right" id="saved_list" class="border mt-2">
+            {% for p in products %}
+                <div>
+                    <a href="{% url 'product-detail' p.product.slug %}">{{ p.product.name }}</a> 
+                    <br>
+                    قیمت {{ p.product.price }}----تعداد ({{ p.buy_num }})
+                    <br>
+                    <a href="{% url 'delete-buy-list' p.product.slug %}">ایا میخواهید حذف کنید؟</a>
+                    <hr align="right" style="width:50%;text-align:left;margin-left:0">
+                </div>
+            {% endfor %}
+            <br><br>   
+             قیمت کل: {{ sum_price }} تومان
+             <br>
+       <button type="button" class="btn btn-success">خرید</button>
+       خرید خود را نهایی کنید
+
+
+    </div>
+{% endblock %}
+
+
+

@@ -1,0 +1,10 @@
+{% extends 'appp/base.html' %}
+
+{% block content %}
+    
+        ایا میخواهید حذف کنید؟
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" value="حذف">
+        </form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'appp/base.html' %}
+
+{% block content %}
+    <h1 align="right">محصولات</h1>
+    <br>
+    <div class="card-columns">
+        {% for p in products %}
+            <div class="card mb-4" style="width: 18rem; background:#c3cfe2;"> 
+                <img class="card-img-top" src="{{ p.image.url }}" alt="Card image cap" height="200px">
+                <div class="card-body">
+                    <h5 class="card-title"><b>{{ p.name }}</b></h5>
+                    <h6 class="card-subtitle mb-4 text-muted">{{ p.price }}تومان</h6>
+                    <a href="{% url 'product-detail' p.slug %}" class="card-link">
+                    <button type="button" class="btn btn-info">جزيیات</button>
+                        
+                    </a>
+                </div>
+            </div>
+            
+        {% endfor %}
+    </div>
+
+{% endblock %}

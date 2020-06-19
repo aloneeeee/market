@@ -1,0 +1,63 @@
+body{
+    background-color: aquamarine;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+}
+
+#navbar{
+    background-color: blueviolet;
+}
+
+#saved_list{
+    background-color: burlywood;
+    inline-size: auto;
+}
+
+#buy_list{
+    background-color: darkgray;
+    inline-size: auto;
+}
+
+#information{
+    float: right;
+    text-align: right;
+    background-color: rgb(220, 245, 255);
+    width: auto;
+    height:auto;
+
+    
+}
+
+#mdnd{
+    text-align: right;
+    height: auto;
+}
+
+#image{
+    float: left;
+    max-width:100%;
+}
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    text-align: right;
+  }
+
+#comment{
+    margin-top:50px;
+}
+
+#comment_box {
+
+    float: right;
+    
+
+}
+
+#save_and_buy{
+    float: right;
+    text-align: right;
+}

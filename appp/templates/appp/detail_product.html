@@ -1,0 +1,168 @@
+{% extends 'appp/base.html' %}
+
+{% block content %}
+
+
+    {% for p in product %}
+        <div id="mdnd">
+            <p class="h1">{{ p.name }}</p>
+            
+            <small>دسته بندی: {{ p.category }} </small>
+        
+        
+            
+            <img id="image"  src="{{ p.image.url }}"> 
+            
+            <br>
+            
+                
+            <h4> قیمت : {{ p.price }} تومان</h4>
+            <h1 >توضیحات</h1>
+            
+            <br>
+            {{ p.detail }}
+            
+            
+        
+            <br>
+                
+            
+        </div>
+    {% endfor %}
+
+
+
+
+
+
+
+
+
+
+    {% if  user.is_authenticated %}
+        <div>
+            <div align="right">
+                {% if empty_save %}
+                
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="saved" class="btn btn-success mt-2 mb-4"> اضافه به لیست علاقه مندی</button>
+                    </form>
+                {% else %}
+                    به لیست علاقه مندی های شما اضافه شده است
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="del_from_saved" class="btn btn-danger mt-2 mb-4"> حذف از لیست علاقه مندی</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        {% if empty_buy %}
+
+
+            <div align="right">
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" name="buy" class="btn btn-success mt-2 mb-4">خرید</button>
+                    <input type="number" placeholder="تعداد" name="num" >
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                <strong>{{message}}</strong> 
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </form>
+
+
+
+            {% else %}
+
+            <div align="right">
+                <form method="post">
+                    {% csrf_token %}
+                    <strong >به لیست خرید شما اضافه شد</strong>
+                    
+                    <br>
+                    <button type="submit" class="btn btn-success mt-2 mb-4">تغییر</button>
+
+                    <input type="number" placeholder="تعداد" name="update_num">
+                    <br>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                <strong></strong> {{message}}
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% for p in product %}
+                        <a href="{% url 'delete-buy-list' p.slug %}">آیا میخواهید از لیست خرید خود حذف کنید؟</a>
+                    {% endfor %}
+                    
+                </form>
+            </div>
+
+            
+            
+        {% endif %}
+        
+    {% endif %}
+    
+
+
+
+
+    
+
+    {% for p in product %}
+    <div>
+        <div id="comment">
+            {% for comment in p.comments.all %}
+                <article class="media content-section">
+                    <div class="media-body">
+                        <div class="article-metadata">
+                            <h5>{{ comment.user }} توسط</h5>
+                            
+                        </div>
+                    <p class="article-content">{{ comment.body }}</p>
+                    <small class="text-muted">{{ comment.created_on|date:"F d, Y" }}</small>
+                    </div>
+                </article> 
+                    
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+    {% if empty_comment %}
+            <div>
+                <form method="post" id="comment_box">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                <strong>{{message}}</strong> 
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% csrf_token %}
+                    <textarea required="true" name="body" id="comment" cols="20" rows="10" placeholder="نظرتان را بنویسید"></textarea>
+                    <button type="submit" class="btn btn-success mt-2 mb-4">ارسال</button>
+
+                </form>   
+            </div> 
+                        
+    {% endif %}
+{% endblock %}
